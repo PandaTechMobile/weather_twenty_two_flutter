@@ -7,50 +7,77 @@ part of 'weather_forecast_dto.dart';
 // **************************************************************************
 
 WeatherForecastDTO _$WeatherForecastDTOFromJson(Map<String, dynamic> json) =>
-    WeatherForecastDTO(
-      city: json['city'] == null
-          ? null
-          : City.fromJson(json['city'] as Map<String, dynamic>),
-      cod: json['cod'] as String?,
-      message: (json['message'] as num?)?.toDouble(),
-      cnt: json['cnt'] as int?,
-      weatherForecasts: (json['list'] as List<dynamic>?)
-          ?.map((e) => WeatherForecast.fromJson(e as Map<String, dynamic>))
-          .toList(),
+    $checkedCreate(
+      'WeatherForecastDTO',
+      json,
+      ($checkedConvert) {
+        final val = WeatherForecastDTO(
+          city: $checkedConvert(
+              'city',
+              (v) =>
+                  v == null ? null : City.fromJson(v as Map<String, dynamic>)),
+          cod: $checkedConvert('cod', (v) => v as String?),
+          message: $checkedConvert('message', (v) => (v as num?)?.toDouble()),
+          cnt: $checkedConvert('cnt', (v) => v as int?),
+          weatherForecasts: $checkedConvert(
+              'list',
+              (v) => (v as List<dynamic>?)
+                  ?.map((e) =>
+                      WeatherForecast.fromJson(e as Map<String, dynamic>))
+                  .toList()),
+        );
+        return val;
+      },
+      fieldKeyMap: const {'weatherForecasts': 'list'},
     );
 
 Map<String, dynamic> _$WeatherForecastDTOToJson(WeatherForecastDTO instance) =>
     <String, dynamic>{
-      'city': instance.city,
+      'city': instance.city?.toJson(),
       'cod': instance.cod,
       'message': instance.message,
       'cnt': instance.cnt,
-      'list': instance.weatherForecasts,
+      'list': instance.weatherForecasts?.map((e) => e.toJson()).toList(),
     };
 
-City _$CityFromJson(Map<String, dynamic> json) => City(
-      id: json['id'] as int?,
-      name: json['name'] as String?,
-      coord: json['coord'] == null
-          ? null
-          : Coord.fromJson(json['coord'] as Map<String, dynamic>),
-      country: json['country'] as String?,
-      population: json['population'] as int?,
-      timezone: json['timezone'] as int?,
+City _$CityFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'City',
+      json,
+      ($checkedConvert) {
+        final val = City(
+          id: $checkedConvert('id', (v) => v as int?),
+          name: $checkedConvert('name', (v) => v as String?),
+          coord: $checkedConvert(
+              'coord',
+              (v) =>
+                  v == null ? null : Coord.fromJson(v as Map<String, dynamic>)),
+          country: $checkedConvert('country', (v) => v as String?),
+          population: $checkedConvert('population', (v) => v as int?),
+          timezone: $checkedConvert('timezone', (v) => v as int?),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'coord': instance.coord,
+      'coord': instance.coord?.toJson(),
       'country': instance.country,
       'population': instance.population,
       'timezone': instance.timezone,
     };
 
-Coord _$CoordFromJson(Map<String, dynamic> json) => Coord(
-      lon: (json['lon'] as num?)?.toDouble(),
-      lat: (json['lat'] as num?)?.toDouble(),
+Coord _$CoordFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'Coord',
+      json,
+      ($checkedConvert) {
+        final val = Coord(
+          lon: $checkedConvert('lon', (v) => (v as num?)?.toDouble()),
+          lat: $checkedConvert('lat', (v) => (v as num?)?.toDouble()),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$CoordToJson(Coord instance) => <String, dynamic>{
@@ -59,27 +86,40 @@ Map<String, dynamic> _$CoordToJson(Coord instance) => <String, dynamic>{
     };
 
 WeatherForecast _$WeatherForecastFromJson(Map<String, dynamic> json) =>
-    WeatherForecast(
-      dt: json['dt'] as int?,
-      sunrise: json['sunrise'] as int?,
-      sunset: json['sunset'] as int?,
-      temp: json['temp'] == null
-          ? null
-          : Temp.fromJson(json['temp'] as Map<String, dynamic>),
-      feelsLike: json['feelsLike'] == null
-          ? null
-          : FeelsLike.fromJson(json['feelsLike'] as Map<String, dynamic>),
-      pressure: (json['pressure'] as num?)?.toDouble(),
-      humidity: (json['humidity'] as num?)?.toDouble(),
-      weather: (json['weather'] as List<dynamic>?)
-          ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      speed: (json['speed'] as num?)?.toDouble(),
-      deg: (json['deg'] as num?)?.toDouble(),
-      gust: (json['gust'] as num?)?.toDouble(),
-      clouds: (json['clouds'] as num?)?.toDouble(),
-      pop: (json['pop'] as num?)?.toDouble(),
-      rain: (json['rain'] as num?)?.toDouble(),
+    $checkedCreate(
+      'WeatherForecast',
+      json,
+      ($checkedConvert) {
+        final val = WeatherForecast(
+          dt: $checkedConvert('dt', (v) => v as int?),
+          sunrise: $checkedConvert('sunrise', (v) => v as int?),
+          sunset: $checkedConvert('sunset', (v) => v as int?),
+          temp: $checkedConvert(
+              'temp',
+              (v) =>
+                  v == null ? null : Temp.fromJson(v as Map<String, dynamic>)),
+          feelsLike: $checkedConvert(
+              'feels_like',
+              (v) => v == null
+                  ? null
+                  : FeelsLike.fromJson(v as Map<String, dynamic>)),
+          pressure: $checkedConvert('pressure', (v) => (v as num?)?.toDouble()),
+          humidity: $checkedConvert('humidity', (v) => (v as num?)?.toDouble()),
+          weather: $checkedConvert(
+              'weather',
+              (v) => (v as List<dynamic>?)
+                  ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
+                  .toList()),
+          speed: $checkedConvert('speed', (v) => (v as num?)?.toDouble()),
+          deg: $checkedConvert('deg', (v) => (v as num?)?.toDouble()),
+          gust: $checkedConvert('gust', (v) => (v as num?)?.toDouble()),
+          clouds: $checkedConvert('clouds', (v) => (v as num?)?.toDouble()),
+          pop: $checkedConvert('pop', (v) => (v as num?)?.toDouble()),
+          rain: $checkedConvert('rain', (v) => (v as num?)?.toDouble()),
+        );
+        return val;
+      },
+      fieldKeyMap: const {'feelsLike': 'feels_like'},
     );
 
 Map<String, dynamic> _$WeatherForecastToJson(WeatherForecast instance) =>
@@ -87,11 +127,11 @@ Map<String, dynamic> _$WeatherForecastToJson(WeatherForecast instance) =>
       'dt': instance.dt,
       'sunrise': instance.sunrise,
       'sunset': instance.sunset,
-      'temp': instance.temp,
-      'feelsLike': instance.feelsLike,
+      'temp': instance.temp?.toJson(),
+      'feels_like': instance.feelsLike?.toJson(),
       'pressure': instance.pressure,
       'humidity': instance.humidity,
-      'weather': instance.weather,
+      'weather': instance.weather?.map((e) => e.toJson()).toList(),
       'speed': instance.speed,
       'deg': instance.deg,
       'gust': instance.gust,
@@ -100,13 +140,20 @@ Map<String, dynamic> _$WeatherForecastToJson(WeatherForecast instance) =>
       'rain': instance.rain,
     };
 
-Temp _$TempFromJson(Map<String, dynamic> json) => Temp(
-      day: (json['day'] as num?)?.toDouble(),
-      min: (json['min'] as num?)?.toDouble(),
-      max: (json['max'] as num?)?.toDouble(),
-      night: (json['night'] as num?)?.toDouble(),
-      eve: (json['eve'] as num?)?.toDouble(),
-      morn: (json['morn'] as num?)?.toDouble(),
+Temp _$TempFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'Temp',
+      json,
+      ($checkedConvert) {
+        final val = Temp(
+          day: $checkedConvert('day', (v) => (v as num?)?.toDouble()),
+          min: $checkedConvert('min', (v) => (v as num?)?.toDouble()),
+          max: $checkedConvert('max', (v) => (v as num?)?.toDouble()),
+          night: $checkedConvert('night', (v) => (v as num?)?.toDouble()),
+          eve: $checkedConvert('eve', (v) => (v as num?)?.toDouble()),
+          morn: $checkedConvert('morn', (v) => (v as num?)?.toDouble()),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$TempToJson(Temp instance) => <String, dynamic>{
@@ -118,11 +165,18 @@ Map<String, dynamic> _$TempToJson(Temp instance) => <String, dynamic>{
       'morn': instance.morn,
     };
 
-FeelsLike _$FeelsLikeFromJson(Map<String, dynamic> json) => FeelsLike(
-      day: (json['day'] as num?)?.toDouble(),
-      night: (json['night'] as num?)?.toDouble(),
-      eve: (json['eve'] as num?)?.toDouble(),
-      morn: (json['morn'] as num?)?.toDouble(),
+FeelsLike _$FeelsLikeFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'FeelsLike',
+      json,
+      ($checkedConvert) {
+        final val = FeelsLike(
+          day: $checkedConvert('day', (v) => (v as num?)?.toDouble()),
+          night: $checkedConvert('night', (v) => (v as num?)?.toDouble()),
+          eve: $checkedConvert('eve', (v) => (v as num?)?.toDouble()),
+          morn: $checkedConvert('morn', (v) => (v as num?)?.toDouble()),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$FeelsLikeToJson(FeelsLike instance) => <String, dynamic>{

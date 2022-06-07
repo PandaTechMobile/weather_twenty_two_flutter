@@ -23,13 +23,13 @@ class ApiServiceBase {
       final response = await _httpClient.get(uri, headers: headers);
 
       responseJson = _handleResponse(response);
+
+      return responseJson;
+      //return JsonHelper.fromJson<T, K>(responseJson);
     } on SocketException {
       // TODO - Handle
       throw RequestFailureException();
     }
-
-    return responseJson;
-    //return JsonHelper.fromJson<T, K>(responseJson);
   }
 
   Future<T> post<T, K>(

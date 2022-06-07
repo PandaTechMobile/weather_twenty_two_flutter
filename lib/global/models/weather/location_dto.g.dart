@@ -6,12 +6,20 @@ part of 'location_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LocationDto _$LocationDtoFromJson(Map<String, dynamic> json) => LocationDto(
-      name: json['name'] as String?,
-      latitude: (json['lat'] as num?)?.toDouble(),
-      logitude: (json['lon'] as num?)?.toDouble(),
-      country: json['country'] as String?,
-      state: json['state'] as String?,
+LocationDto _$LocationDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'LocationDto',
+      json,
+      ($checkedConvert) {
+        final val = LocationDto(
+          name: $checkedConvert('name', (v) => v as String?),
+          latitude: $checkedConvert('lat', (v) => (v as num?)?.toDouble()),
+          logitude: $checkedConvert('lon', (v) => (v as num?)?.toDouble()),
+          country: $checkedConvert('country', (v) => v as String?),
+          state: $checkedConvert('state', (v) => v as String?),
+        );
+        return val;
+      },
+      fieldKeyMap: const {'latitude': 'lat', 'logitude': 'lon'},
     );
 
 Map<String, dynamic> _$LocationDtoToJson(LocationDto instance) =>

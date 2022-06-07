@@ -6,11 +6,19 @@ part of 'weather.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Weather _$WeatherFromJson(Map<String, dynamic> json) => Weather(
-      id: json['id'] as int?,
-      descriptionSimple: json['main'] as String?,
-      description: json['description'] as String?,
-      icon: json['icon'] as String?,
+Weather _$WeatherFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'Weather',
+      json,
+      ($checkedConvert) {
+        final val = Weather(
+          id: $checkedConvert('id', (v) => v as int?),
+          descriptionSimple: $checkedConvert('main', (v) => v as String?),
+          description: $checkedConvert('description', (v) => v as String?),
+          icon: $checkedConvert('icon', (v) => v as String?),
+        );
+        return val;
+      },
+      fieldKeyMap: const {'descriptionSimple': 'main'},
     );
 
 Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{

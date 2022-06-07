@@ -9,3 +9,7 @@ class CurrentWeatherRequestFailure implements Exception {}
 
 /// Exception thrown when weather for provided location is not found.
 class CurrentWeatherNotFoundFailure implements Exception {}
+
+class DailyWeatherForecastsNotFoundFailure implements Exception {}
+
+class DailyWeatherForecastsRequestFailure implements Exception {}

@@ -1,20 +1,25 @@
+import 'package:http/http.dart' as http;
+
 import '../../models/models.dart';
 import 'api_service_base.dart';
 
 /// {@template open_weather_api_client}
 /// Dart API Client which wraps the [Open Weather API](https://api.openweathermap.org/).
 /// {@endtemplate}
-class OpenWeatherApi extends ApiServiceBase {
+class OpenWeatherApiService extends ApiServiceBase {
   static const String _apiKey = 'todo';
   static const String _baseApiAuthority = 'api.openweathermap.org';
 
+  OpenWeatherApiService({http.Client? httpClient})
+      : super(httpClient: httpClient);
+
   /// Finds a [LocationDto] `geo/1.0/direct?q={city name},{country code}&limit={limit}&appid={API key}`.
   Future<LocationDto> locationSearch(
-      String location, String countryCode) async {
+      String locationName, String countryCode) async {
     try {
       var apiEndpoint = 'geo/1.0/direct';
       Map<String, dynamic> parameters = {
-        'q': location + ',' + countryCode,
+        'q': '$locationName,$countryCode',
         'limit': '1',
         'appId': _apiKey,
       };
@@ -63,7 +68,7 @@ class OpenWeatherApi extends ApiServiceBase {
     var apiEndpoint = 'data/2.5/forecast/daily';
     try {
       Map<String, dynamic> parameters = {
-        'q': location + ',' + countryCode,
+        'q': '$location,$countryCode',
         'cnt': dayCount.toString(),
         'appId': _apiKey
       };
@@ -73,14 +78,14 @@ class OpenWeatherApi extends ApiServiceBase {
 
       if (responseJson.isEmpty) {
         // TODO - Fix this error
-        throw CurrentWeatherNotFoundFailure();
+        throw DailyWeatherForecastsNotFoundFailure();
       }
 
       return WeatherForecastDTO.fromJson(
           responseJson.first as Map<String, dynamic>);
     } on RequestFailureException {
       // TODO - Fix this exception
-      throw CurrentWeatherRequestFailure();
+      throw DailyWeatherForecastsRequestFailure();
     }
   }
 }
