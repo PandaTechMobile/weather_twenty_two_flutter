@@ -19,7 +19,12 @@ class CurrentWeatherCubit extends HydratedCubit<CurrentWeatherState> {
   // Future<void> fetchCurrentWeather(String? city) async {
   //   if (city == null || city.isEmpty) return;
 
-  Future<void> fetchCurrentWeather() async {
+  // Future<void> fetchCurrentWeather() async {
+  //   emit(state.copyWith(status: CurrentWeatherStatus.loading));
+
+  Future<void> fetchCurrentWeather(double? latitude, double? longitude) async {
+    if (latitude == null || longitude == null) return;
+
     emit(state.copyWith(status: CurrentWeatherStatus.loading));
 
     try {
@@ -29,7 +34,7 @@ class CurrentWeatherCubit extends HydratedCubit<CurrentWeatherState> {
       final currentWeather = CurrentWeather(
         condition: 'Fine',
         lastUpdated: DateTime.now(),
-        temperature: const Temperature(value: 0),
+        temperature: const Temperature(value: 9.8),
         location: 'Newcastle',
       );
       final units = state.temperatureUnits;
@@ -60,7 +65,7 @@ class CurrentWeatherCubit extends HydratedCubit<CurrentWeatherState> {
       final currentWeather = CurrentWeather(
         condition: 'Fine',
         lastUpdated: DateTime.now(),
-        temperature: const Temperature(value: 0),
+        temperature: const Temperature(value: 9.8),
         location: 'Newcastle',
       );
       final units = state.temperatureUnits;
