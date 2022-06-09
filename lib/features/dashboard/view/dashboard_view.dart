@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../settings/view/settings_page.dart';
 import '../cubit/current_weather_cubit.dart';
 import '../widgets/widgets.dart';
 
@@ -16,9 +17,9 @@ class DashboardView extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
-              // Navigator.of(context).push<void>(SettingsPage.route(
-              //   context.read<WeatherCubit>(),
-              // ));
+              Navigator.of(context).push<void>(SettingsPage.route(
+                context.read<CurrentWeatherCubit>(),
+              ));
             },
           ),
         ],
