@@ -3,7 +3,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../models/models.dart';
-import '../../../global/helpers/double_extensions.dart';
+import '../../../helpers/double_extensions.dart';
 
 part 'current_weather_cubit.g.dart';
 part 'current_weather_state.dart';

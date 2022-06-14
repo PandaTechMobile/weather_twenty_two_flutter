@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../search/view/location_search_page.dart';
 import '../../settings/view/settings_page.dart';
 import '../cubit/current_weather_cubit.dart';
 import '../widgets/widgets.dart';
@@ -14,13 +15,27 @@ class DashboardView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter Weather'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).push<void>(SettingsPage.route(
-                context.read<CurrentWeatherCubit>(),
-              ));
-            },
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.of(context).push<void>(SettingsPage.route(
+                    context.read<CurrentWeatherCubit>(),
+                  ));
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.search_sharp),
+                onPressed: () async {
+                  final city = await Navigator.of(context)
+                      .push(LocationSearchPage.route());
+                  await context
+                      .read<CurrentWeatherCubit>()
+                      .fetchCurrentWeather(-32.9192953, 151.7795348);
+                },
+              ),
+            ],
           ),
         ],
       ),

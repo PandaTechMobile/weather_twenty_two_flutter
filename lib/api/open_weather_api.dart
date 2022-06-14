@@ -1,20 +1,20 @@
 import 'package:http/http.dart' as http;
 
 import '../../models/models.dart';
-import 'api_service_base.dart';
+import '../../exceptions/exceptions.dart';
+import 'base_api.dart';
 
 /// {@template open_weather_api_client}
 /// Dart API Client which wraps the [Open Weather API](https://api.openweathermap.org/).
 /// {@endtemplate}
-class OpenWeatherApiService extends ApiServiceBase {
+class OpenWeatherApi extends BaseApi {
   static const String _apiKey = 'todo';
   static const String _baseApiAuthority = 'api.openweathermap.org';
 
-  OpenWeatherApiService({http.Client? httpClient})
-      : super(httpClient: httpClient);
+  OpenWeatherApi({http.Client? httpClient}) : super(httpClient: httpClient);
 
   /// Finds a [LocationDto] `geo/1.0/direct?q={city name},{country code}&limit={limit}&appid={API key}`.
-  Future<LocationDto> locationSearch(
+  Future<LocationDto> getLocation(
       String locationName, String countryCode) async {
     try {
       var apiEndpoint = 'geo/1.0/direct';

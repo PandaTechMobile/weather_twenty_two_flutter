@@ -4,7 +4,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:test/test.dart';
 import 'package:weather_twenty_two_flutter/features/dashboard/cubit/current_weather_cubit.dart';
 import 'package:weather_twenty_two_flutter/features/dashboard/models/models.dart';
-import 'package:weather_twenty_two_flutter/global/helpers/double_extensions.dart';
+import 'package:weather_twenty_two_flutter/helpers/double_extensions.dart';
 //import 'package:weather_repository/weather_repository.dart' as weather_repository;
 
 import '../../helpers/hydrated_bloc.dart';

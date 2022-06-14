@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
-import 'package:weather_twenty_two_flutter/global/models/exceptions/weather_api_exceptions.dart';
-import 'package:weather_twenty_two_flutter/global/models/weather/location_dto.dart';
-import 'package:weather_twenty_two_flutter/global/services/api/open_weather_api_service.dart';
+import 'package:weather_twenty_two_flutter/exceptions/exceptions.dart';
+import 'package:weather_twenty_two_flutter/models/models.dart';
+import 'package:weather_twenty_two_flutter/api/open_weather_api.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
@@ -14,7 +14,7 @@ class FakeUri extends Fake implements Uri {}
 void main() {
   group('OpenWeatherApiService', () {
     late http.Client httpClient;
-    late OpenWeatherApiService openWeatherApiService;
+    late OpenWeatherApi openWeatherApiService;
 
     setUpAll(() {
       registerFallbackValue(FakeUri());
@@ -22,12 +22,12 @@ void main() {
 
     setUp(() {
       httpClient = MockHttpClient();
-      openWeatherApiService = OpenWeatherApiService(httpClient: httpClient);
+      openWeatherApiService = OpenWeatherApi(httpClient: httpClient);
     });
 
     group('constructor', () {
       test('does not require an httpClient', () {
-        expect(OpenWeatherApiService(), isNotNull);
+        expect(OpenWeatherApi(), isNotNull);
       });
     });
 
@@ -55,7 +55,7 @@ void main() {
 
         // Act
         try {
-          await openWeatherApiService.locationSearch(
+          await openWeatherApiService.getLocation(
               locationName, locationCountryCode);
         } catch (_) {}
 
@@ -78,7 +78,7 @@ void main() {
         when(() => httpClient.get(any(), headers: headers))
             .thenAnswer((_) async => response);
         expect(
-          () async => await openWeatherApiService.locationSearch(
+          () async => await openWeatherApiService.getLocation(
               locationName, locationCountryCode),
           throwsA(isA<LocationRequestFailure>()),
         );
@@ -91,7 +91,7 @@ void main() {
         when(() => httpClient.get(any(), headers: headers))
             .thenAnswer((_) async => response);
         expect(
-          () async => await openWeatherApiService.locationSearch(
+          () async => await openWeatherApiService.getLocation(
               locationName, locationCountryCode),
           throwsA(isA<LocationNotFoundFailure>()),
         );
@@ -115,7 +115,7 @@ void main() {
         );
         when(() => httpClient.get(any(), headers: headers))
             .thenAnswer((_) async => response);
-        final actual = await openWeatherApiService.locationSearch(
+        final actual = await openWeatherApiService.getLocation(
             locationName, locationCountryCode);
         expect(
             actual,

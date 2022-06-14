@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
-import '../../models/exceptions/custom_api_exceptions.dart';
+import '../../exceptions/exceptions.dart';
 
-class ApiServiceBase {
+class BaseApi {
   //static const String _baseApi = 'api.openweathermap.org';
   final http.Client _httpClient;
 
-  ApiServiceBase({http.Client? httpClient})
+  BaseApi({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
   Future<T> get<T, K>(String baseApiAuthority, String apiEndpoint,

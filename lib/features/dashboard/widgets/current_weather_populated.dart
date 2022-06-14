@@ -76,6 +76,7 @@ class _WeatherIcon extends StatelessWidget {
   String _weatherConditionToEmoji(String weatherCondition) {
     switch (weatherCondition) {
       case 'Clear':
+      case 'Fine':
         return '☀️';
       case 'Rain':
         return '🌧️';
