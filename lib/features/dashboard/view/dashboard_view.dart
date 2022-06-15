@@ -26,7 +26,7 @@ class DashboardView extends StatelessWidget {
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.search_sharp),
+                icon: const Icon(Icons.search),
                 onPressed: () async {
                   final city = await Navigator.of(context)
                       .push(LocationSearchPage.route());
