@@ -95,8 +95,9 @@ class CurrentWeatherCubit extends HydratedCubit<CurrentWeatherState> {
               currentWeather.copyWith(temperature: Temperature(value: value)),
         ),
       );
-    } catch (ex) {
+    } catch (ex, stacktrace) {
       print(ex);
+      print(stacktrace);
       emit(state);
       // TODO - show snackbar error
     }

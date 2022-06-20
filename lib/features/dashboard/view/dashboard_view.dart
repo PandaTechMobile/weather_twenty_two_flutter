@@ -28,7 +28,7 @@ class DashboardView extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () async {
-                  final city = await Navigator.of(context)
+                  var city = await Navigator.of(context)
                       .push(LocationSearchPage.route());
                   await context
                       .read<CurrentWeatherCubit>()

@@ -68,8 +68,9 @@ class OpenWeatherApi extends BaseApi {
       return CurrentWeatherDto.fromJson(responseJson as Map<String, dynamic>);
     } on RequestFailureException {
       throw CurrentWeatherRequestFailure();
-    } catch (ex) {
+    } catch (ex, stacktrace) {
       print(e);
+      print(stacktrace);
       rethrow;
     }
   }
