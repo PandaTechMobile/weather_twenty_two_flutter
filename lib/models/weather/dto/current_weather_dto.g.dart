@@ -138,7 +138,8 @@ WeatherInfo _$WeatherInfoFromJson(Map<String, dynamic> json) => $checkedCreate(
       ($checkedConvert) {
         final val = WeatherInfo(
           temp: $checkedConvert('temp', (v) => (v as num?)?.toDouble()),
-          feelsLike: $checkedConvert('feels_like', (v) => v as int?),
+          feelsLike:
+              $checkedConvert('feels_like', (v) => (v as num?)?.toDouble()),
           tempMin: $checkedConvert('temp_min', (v) => (v as num?)?.toDouble()),
           tempMax: $checkedConvert('temp_max', (v) => (v as num?)?.toDouble()),
           pressure: $checkedConvert('pressure', (v) => v as int?),

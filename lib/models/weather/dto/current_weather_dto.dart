@@ -90,7 +90,7 @@ class Twilight {
 @JsonSerializable()
 class WeatherInfo {
   double? temp;
-  int? feelsLike;
+  double? feelsLike;
   double? tempMin;
   double? tempMax;
   int? pressure;

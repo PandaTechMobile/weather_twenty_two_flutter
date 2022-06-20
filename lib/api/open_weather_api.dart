@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:http/http.dart' as http;
 
 import '../../exceptions/exceptions.dart';
@@ -66,6 +68,9 @@ class OpenWeatherApi extends BaseApi {
       return CurrentWeatherDto.fromJson(responseJson as Map<String, dynamic>);
     } on RequestFailureException {
       throw CurrentWeatherRequestFailure();
+    } catch (ex) {
+      print(e);
+      rethrow;
     }
   }
 
