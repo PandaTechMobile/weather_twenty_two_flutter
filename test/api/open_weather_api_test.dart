@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
-import 'package:weather_twenty_two_flutter/exceptions/exceptions.dart';
-import 'package:weather_twenty_two_flutter/models/models.dart';
 import 'package:weather_twenty_two_flutter/api/open_weather_api.dart';
+import 'package:weather_twenty_two_flutter/exceptions/exceptions.dart';
+import 'package:weather_twenty_two_flutter/models/models_dto.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

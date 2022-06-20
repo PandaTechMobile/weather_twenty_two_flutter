@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_twenty_two_flutter/enums/weather_condition.dart';
+import 'package:weather_twenty_two_flutter/models/weather/weather_model.dart';
 
 import 'temperature.dart';
 
@@ -17,25 +19,25 @@ class CurrentWeather extends Equatable {
   factory CurrentWeather.fromJson(Map<String, dynamic> json) =>
       _$CurrentWeatherFromJson(json);
 
-  // factory Weather.fromRepository(weather_repository.Weather weather) {
-  //   return Weather(
-  //     condition: weather.condition,
-  //     lastUpdated: DateTime.now(),
-  //     location: weather.location,
-  //     temperature: Temperature(value: weather.temperature),
-  //   );
-  // }
+  factory CurrentWeather.fromRepository(WeatherModel weather) {
+    return CurrentWeather(
+      condition: weather.condition,
+      lastUpdated: DateTime.now(),
+      location: weather.locationName,
+      temperature: Temperature(value: weather.temperature),
+    );
+  }
 
   static final empty = CurrentWeather(
     //condition: WeatherCondition.unknown,
-    condition: '??',
+    condition: WeatherCondition.unknown,
     lastUpdated: DateTime(0),
     temperature: const Temperature(value: 0),
     location: '--',
   );
 
   //final WeatherCondition condition;
-  final String condition;
+  final WeatherCondition condition;
   final DateTime lastUpdated;
   final String location;
   final Temperature temperature;
@@ -47,7 +49,7 @@ class CurrentWeather extends Equatable {
 
   CurrentWeather copyWith({
     //WeatherCondition? condition,
-    String? condition,
+    WeatherCondition? condition,
     DateTime? lastUpdated,
     String? location,
     Temperature? temperature,

@@ -1,14 +1,14 @@
 import 'package:http/http.dart' as http;
 
-import '../../models/models.dart';
 import '../../exceptions/exceptions.dart';
+import '../../models/models_dto.dart';
 import 'base_api.dart';
 
 /// {@template open_weather_api_client}
 /// Dart API Client which wraps the [Open Weather API](https://api.openweathermap.org/).
 /// {@endtemplate}
 class OpenWeatherApi extends BaseApi {
-  static const String _apiKey = 'todo';
+  static const String _apiKey = 'cc9744ca800087e4526b74ae84e1f065';
   static const String _baseApiAuthority = 'api.openweathermap.org';
 
   OpenWeatherApi({http.Client? httpClient}) : super(httpClient: httpClient);
@@ -43,10 +43,16 @@ class OpenWeatherApi extends BaseApi {
     try {
       var apiEndpoint = 'data/2.5/weather';
       Map<String, dynamic> parameters = {
-        'lat': latitude,
-        'lon': longitude,
+        'lat': latitude.toString(),
+        'lon': longitude.toString(),
         'appId': _apiKey
       };
+
+      // Map<String, dynamic> parameters = {
+      //   'lat': latitude,
+      //   'lon': longitude,
+      //   'appId': _apiKey
+      // };
 
       final responseJson =
           await get<dynamic, void>(_baseApiAuthority, apiEndpoint, parameters);
@@ -55,8 +61,9 @@ class OpenWeatherApi extends BaseApi {
         throw CurrentWeatherNotFoundFailure();
       }
 
-      return CurrentWeatherDto.fromJson(
-          responseJson.first as Map<String, dynamic>);
+      // return CurrentWeatherDto.fromJson(
+      //     responseJson.first as Map<String, dynamic>);
+      return CurrentWeatherDto.fromJson(responseJson as Map<String, dynamic>);
     } on RequestFailureException {
       throw CurrentWeatherRequestFailure();
     }

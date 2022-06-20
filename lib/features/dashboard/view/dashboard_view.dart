@@ -13,7 +13,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Weather'),
+        title: const Text('Weather Twenty Two'),
         actions: [
           Row(
             children: [

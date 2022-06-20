@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_twenty_two_flutter/features/dashboard/services/weather_service.dart';
 
 import '../cubit/current_weather_cubit.dart';
 import 'dashboard_view.dart';
@@ -20,7 +21,7 @@ class DashboardPage extends StatelessWidget {
 
     // TODO - refactor into the widget
     return BlocProvider(
-      create: (context) => CurrentWeatherCubit(),
+      create: (context) => CurrentWeatherCubit(context.read<WeatherService>()),
       child: const DashboardView(),
     );
   }

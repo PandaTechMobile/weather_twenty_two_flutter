@@ -2,7 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'weather.dart';
 
-part 'current_weather_dto.g.dart';
+part ''
+    'current_weather_dto.g.dart';
 
 @JsonSerializable()
 class CurrentWeatherDto {

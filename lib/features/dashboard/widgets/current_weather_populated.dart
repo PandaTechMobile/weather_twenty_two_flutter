@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather_twenty_two_flutter/enums/weather_condition.dart';
 
 import '../models/models.dart';
+import 'weather_background.dart';
 
 class CurrentWeatherPopulated extends StatelessWidget {
   const CurrentWeatherPopulated({
@@ -19,7 +21,7 @@ class CurrentWeatherPopulated extends StatelessWidget {
     final theme = Theme.of(context);
     return Stack(
       children: [
-        _WeatherBackground(),
+        WeatherBackground(),
         RefreshIndicator(
           onRefresh: onRefresh,
           child: SingleChildScrollView(
@@ -62,7 +64,23 @@ class _WeatherIcon extends StatelessWidget {
   static const _iconSize = 100.0;
 
   //final WeatherCondition condition;
-  final String condition;
+  final WeatherCondition condition;
+
+  String _weatherConditionToEmoji(WeatherCondition weatherCondition) {
+    switch (weatherCondition) {
+      case WeatherCondition.clear:
+        return '☀️';
+      case WeatherCondition.rain:
+      case WeatherCondition.drizzle:
+        return '🌧️';
+      case WeatherCondition.clouds:
+        return '☁️';
+      case WeatherCondition.snow:
+        return '🌨️';
+      default:
+        return '❓';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +90,29 @@ class _WeatherIcon extends StatelessWidget {
       style: const TextStyle(fontSize: _iconSize),
     );
   }
+}
 
-  String _weatherConditionToEmoji(String weatherCondition) {
-    switch (weatherCondition) {
-      case 'Clear':
-      case 'Fine':
-        return '☀️';
-      case 'Rain':
-        return '🌧️';
-      case 'Clouds':
-        return '☁️';
-      case 'Snow':
-        return '🌨️';
-      default:
-        return '❓';
-    }
+extension on CurrentWeather {
+  String formattedTemperature(TemperatureUnits units) {
+    return '''${temperature.value.toStringAsPrecision(2)}°${units.isCelsius ? 'C' : 'F'}''';
   }
 }
+//   String _weatherConditionToEmoji(String weatherCondition) {
+//     switch (weatherCondition) {
+//       case 'Clear':
+//       case 'Fine':
+//         return '☀️';
+//       case 'Rain':
+//         return '🌧️';
+//       case 'Clouds':
+//         return '☁️';
+//       case 'Snow':
+//         return '🌨️';
+//       default:
+//         return '❓';
+//     }
+//   }
+// }
 
 // extension on WeatherCondition {
 //   String get toEmoji {
@@ -107,44 +131,3 @@ class _WeatherIcon extends StatelessWidget {
 //     }
 //   }
 // }
-
-class _WeatherBackground extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).primaryColor;
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [0.25, 0.75, 0.90, 1.0],
-          colors: [
-            color,
-            color.brighten(10),
-            color.brighten(33),
-            color.brighten(50),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-extension on Color {
-  Color brighten([int percent = 10]) {
-    assert(1 <= percent && percent <= 100);
-    final p = percent / 100;
-    return Color.fromARGB(
-      alpha,
-      red + ((255 - red) * p).round(),
-      green + ((255 - green) * p).round(),
-      blue + ((255 - blue) * p).round(),
-    );
-  }
-}
-
-extension on CurrentWeather {
-  String formattedTemperature(TemperatureUnits units) {
-    return '''${temperature.value.toStringAsPrecision(2)}°${units.isCelsius ? 'C' : 'F'}''';
-  }
-}
